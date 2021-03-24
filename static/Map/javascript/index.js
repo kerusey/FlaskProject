@@ -1,0 +1,1 @@
+// TODO: migrate js code from map index.html to separate static file (here)

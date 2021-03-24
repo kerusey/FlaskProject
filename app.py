@@ -1,6 +1,17 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
+from json import loads
 
+
+config = loads(open("config.json", 'r').read())
 app = Flask(__name__)
+
+@app.route("/map")
+def mapview():
+    return render_template('Map/index.html',
+                           apikey=config['map api key'],
+                           latitude=22.719568,
+                           longitude=75.857727,
+                           address="name of shit")
 
 
 @app.errorhandler(404)
