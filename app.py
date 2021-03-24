@@ -9,10 +9,10 @@ app = Flask(__name__)
 def mapview():
     return render_template('Map/index.html',
                            apikey=config['map api key'],
-                           latitude=22.719568,
-                           longitude=75.857727,
-                           address="name of shit")
-
+                           mapCenterLatitude=22.719568,
+                           mapCenterLongitude=75.857727,
+                           markers=[[22.719568, 75.857727], [23.719568, 76.857727]])
+           
 
 @app.errorhandler(404)
 def page_not_found(e):
