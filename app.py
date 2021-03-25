@@ -4,19 +4,27 @@ import Database
 
 
 config = loads(open("config.json", 'r').read())
-database = Database.connectToDatabase(config)
-# markers = Database.getInformationFromDatabase(config, database)  # TODO: marker should show comment information on tap
-markers = [list(item[:-1]) for item in Database.getInformationFromDatabase(config, database)]
 app = Flask(__name__)
+
+
+@app.route("/3dmap")
+def map3DView():
+    return render_template('3DMap/index.html',
+                           apikey=config['3DMap api key'])
 
 
 @app.route("/map")
 def mapview():
+    database = Database.connectToDatabase(config)
+    markersInformation = Database.getInformationFromDatabase(config, database)
+    markersCoordinates = [list(item[:-1]) for item in markersInformation]
+    markersComments = [list(item[-1]) for item in markersInformation]
     return render_template('Map/index.html',
                            apikey=config['map api key'],
                            mapCenterLatitude=22.719568,
                            mapCenterLongitude=75.857727,
-                           markers=markers)
+                           markers=markersCoordinates,
+                           markerComments=markersComments)
            
 
 @app.errorhandler(404)

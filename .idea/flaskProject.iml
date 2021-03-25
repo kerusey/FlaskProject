@@ -13,6 +13,9 @@
     <orderEntry type="library" name="mapsjs-service" level="application" />
     <orderEntry type="library" name="mapsjs-core" level="application" />
     <orderEntry type="library" name="mapsjs-ui" level="application" />
+    <orderEntry type="library" name="mapsjs-pano" level="application" />
+    <orderEntry type="library" name="three" level="application" />
+    <orderEntry type="library" name="@here/harp.gl" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />

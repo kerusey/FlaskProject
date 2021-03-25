@@ -1,0 +1,49 @@
+<html lang="">
+<head>
+    <title>3D Map</title>
+    <style>
+        body, html {
+            border: 0;
+            margin: 0;
+            padding: 0
+        }
+
+        #map {
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+    <script src="https://unpkg.com/three/build/three.min.js"></script>
+    <script src="https://unpkg.com/@here/harp.gl/dist/harp.js"></script>
+</head>
+<body>
+<canvas id="map"></canvas>
+<script>
+    const canvas = document.getElementById('map');
+    const map = new harp.MapView({
+        canvas,
+        theme: "https://unpkg.com/@here/harp-map-theme@latest/resources/berlin_tilezen_night_reduced.json"
+    });
+
+    // center the camera to New York
+    map.lookAt({
+        target: new harp.GeoCoordinates(40.70398928, -74.01319808),
+        zoomLevel: 17,
+        tilt: 40,
+    });
+
+    const mapControls = new harp.MapControls(map);
+    const ui = new harp.MapControlsUI(mapControls);
+    canvas.parentElement.appendChild(ui.domElement);
+
+    map.resize(window.innerWidth, window.innerHeight);
+    window.onresize = () => map.resize(window.innerWidth, window.innerHeight);
+
+    const omvDataSource = new harp.VectorTileDataSource({
+        authenticationCode: '{{ apikey }}',
+    });
+    map.addDataSource(omvDataSource);
+
+</script>
+</body>
+</html>
